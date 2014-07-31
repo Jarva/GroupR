@@ -8,7 +8,7 @@ local GroupR = {}
 GroupR.Config = {}
 
 GroupR.Config.GroupID = 6048343 -- Found on the edit page of your group. Example: http://steamcommunity.com/groups/DAOfficial/edit
-GroupR.Config.APIKey = "B7B7D64A021B6F36107499BB8E509F28" -- You can get an API key from: https://steamcommunity.com/dev/apikey
+GroupR.Config.APIKey = "-API KEY-" -- You can get an API key from: https://steamcommunity.com/dev/apikey
 
 GroupR.Config.GroupURL = "http://steamcommunity.com/groups/DAOfficial" -- This is the URL of your group.
 GroupR.Config.JoinCommand = "!group" -- The command typed to join the group
