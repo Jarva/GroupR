@@ -18,6 +18,7 @@ GroupR.Config.RewardMessageInterval = 300 -- This is the time between each annou
 GroupR.Config.MembershipStatusMessage = "Your group membership status will be checked in %s."
 
 GroupR.Config.AlreadyJoinedMessage = "You've already received your reward." -- Message when the player has already received the reward.
+GroupR.Config.PrivateProfile = "Your profile is private, so you can't receive the reward."
 GroupR.Config.RankNotAllowedMessage = "Why would you want to down-rank yourself?" -- Message when the player is not in the allowed ranks.
 GroupR.Config.AllowedRanks = { "user" } -- List of groups allowed to use the command. Add "*" to allow all users. Example: { "*" } or { "user", "superadmin" }
 
@@ -48,6 +49,8 @@ hook.Add("PlayerSay", "GroupR", function(p,t)
 		if not IsValid(p) then return end
 		SAPI.GetUserGroupList(p:SteamID64(), function(data)
 			local groups = {}
+			if not IsValid(p) then return end
+			if not data.response.groups then p:ChatPrint(GroupR.Config.PrivateProfile) return end
 			for i=1,#data.response.groups do
 				groups[i] = data.response.groups[i].gid
 			end
