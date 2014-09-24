@@ -28,8 +28,7 @@ GroupR.Config.AllowedRanks = { "user" } -- Example: { "*", "user", "superadmin" 
 GroupR.Config.RewardSuccessMessage = "Thank you for joining our Steam Group, you're now a Member!"
 GroupR.Config.RewardSuccessBroadcast = "%s has just joined our Steam Group and received the Member rank!"
 GroupR.Config.RewardFunction = function(ply)
-	--ULib.ucl.addUser(ply:SteamID(), nil, nil, "member")
-	ply:ChatPrint("I love you")
+	ULib.ucl.addUser(ply:SteamID(), nil, nil, "member")
 end
 
 require 'gxml'
