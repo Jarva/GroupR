@@ -50,12 +50,10 @@ function GroupR.ProcessReward(p)
 	if not IsValid(p) then return end
 
 	if tobool(p:GetPData("GroupR")) then
-		p:ChatPrint(GroupR.Config.AlreadyJoinedMessage)
 		return false
 	end
 
 	if not (table.HasValue(GroupR.Config.AllowedRanks, p:GetNWString("usergroup")) or table.HasValue(GroupR.Config.AllowedRanks, "*")) then
-		p:ChatPrint(GroupR.Config.RankNotAllowedMessage)
 		return false
 	end
 
