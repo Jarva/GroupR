@@ -73,7 +73,9 @@ function GroupR.CheckGroup()
 		GroupR.GroupData = XMLToTable(body)
 		GroupR.Members = GroupR.GroupData.memberList.members.steamID64
 		for k,v in ipairs(player.GetAll()) do
-			GroupR.ProcessReward(v)
+			if GroupR.Members[v:SteamID64()] then
+				GroupR.ProcessReward(v)
+			end
 		end
 	end)
 end
