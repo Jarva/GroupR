@@ -43,6 +43,14 @@ hook.Add("PlayerSay", "GroupR", function(p ,t)
 	end
 
 	p:SendLua('gui.OpenURL("'..GroupR.Config.GroupURL..'")')
+	if not timer.Exists("GroupR.GroupCheck") then 
+		timer.Create("GroupR.MessageInterval", GroupR.Config.RewardMessageInterval, 0, function()
+			for k,v in ipairs(player.GetAll()) do
+				v:ChatPrint(GroupR.Config.RewardMessage)
+			end
+		end)
+		return
+	end
 	p:ChatPrint(string.format(GroupR.Config.MembershipStatusMessage, fancy_time_format(timer.TimeLeft("GroupR.GroupCheck"))))
 end)
 
