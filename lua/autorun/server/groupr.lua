@@ -51,7 +51,7 @@ hook.Add("PlayerSay", "GroupR", function(p ,t)
 		end)
 		return
 	else
-		p:ChatPrint(string.format(GroupR.Config.MembershipStatusMessage, fancy_time_format(timer.TimeLeft("GroupR.GroupCheck"))))
+		p:ChatPrint(string.format(GroupR.Config.MembershipStatusMessage, string.NiceTime(timer.TimeLeft("GroupR.GroupCheck"))))
 	end
 end)
 
