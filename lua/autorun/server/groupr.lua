@@ -81,9 +81,9 @@ function GroupR.CheckGroup()
 	http.Fetch("http://steamcommunity.com/gid/"..GroupR.Config.GroupID.."/memberslistxml/?xml=1", function(body)
 		GroupR.GroupData = XMLToTable(body)
 		GroupR.Members = GroupR.GroupData.memberList.members.steamID64
-		for k,v in ipairs(player.GetAll()) do
-			if GroupR.Members[v:SteamID64()] then
-				GroupR.ProcessReward(v)
+		for i, p in ipairs(player.GetAll()) do
+			for k, v in pairs(GroupR.Members) do
+				if p:SteamID64() == v then GroupR.ProcessReward(p) end
 			end
 		end
 	end)
