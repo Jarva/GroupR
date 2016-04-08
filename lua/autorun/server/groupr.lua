@@ -31,6 +31,40 @@ GroupR.Config.RewardFunction = function(ply)
 	ULib.ucl.addUser(ply:SteamID(), nil, nil, "member")
 end
 
+--[[
+	Time Utilities
+]]--
+
+local math = math
+local timeUnits = {
+	{name = "hour"      , length = 60*60        },
+	{name = "minute"    , length = 60           },
+	{name = "second"    , length = 1            },
+}
+local function fancy_time_format(time_in_seconds)
+	local results = {}
+	time_in_seconds = math.max(0, time_in_seconds)
+	for i = 1, #timeUnits do
+		if time_in_seconds <= 0 then
+			break
+		end
+		if time_in_seconds >= timeUnits[i].length then
+			local amount = math.floor(time_in_seconds / timeUnits[i].length)
+			local unit   = timeUnits[i].name
+			if amount > 1 then
+				unit = unit .. "s,"
+			else
+				unit = unit .. ","
+			end
+			results[#results + 1] = amount
+			results[#results + 1] = unit
+			time_in_seconds = time_in_seconds - amount * timeUnits[i].length
+		end
+	end
+	local result = table.concat(results, " "):sub(1,-2)
+	return result
+end
+
 require 'gxml'
 
 hook.Add("PlayerSay", "GroupR", function(p ,t)
@@ -97,38 +131,4 @@ if GroupR.Config.RewardMessageInterval > 0 then
 			v:ChatPrint(GroupR.Config.RewardMessage)
 		end
 	end)
-end
-
---[[
-	Time Utilities
-]]--
-
-local math = math
-local timeUnits = {
-	{name = "hour"      , length = 60*60        },
-	{name = "minute"    , length = 60           },
-	{name = "second"    , length = 1            },
-}
-local function fancy_time_format(time_in_seconds)
-	local results = {}
-	time_in_seconds = math.max(0, time_in_seconds)
-	for i = 1, #timeUnits do
-		if time_in_seconds <= 0 then
-			break
-		end
-		if time_in_seconds >= timeUnits[i].length then
-			local amount = math.floor(time_in_seconds / timeUnits[i].length)
-			local unit   = timeUnits[i].name
-			if amount > 1 then
-				unit = unit .. "s,"
-			else
-				unit = unit .. ","
-			end
-			results[#results + 1] = amount
-			results[#results + 1] = unit
-			time_in_seconds = time_in_seconds - amount * timeUnits[i].length
-		end
-	end
-	local result = table.concat(results, " "):sub(1,-2)
-	return result
 end
